@@ -9,9 +9,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Initial state of the board
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-int: S;
-int: N = S*S;
-array[<TODO>, <TODO>] of <TODO>: board;
+array[int,int] of int: board;
+set of int: PuzzleRange = index_set_1of2(board);
+int: N = max(PuzzleRange);
+int: S = floor(sqrt(N));
+
+constraint assert(index_set_2of2(board) = PuzzleRange, "The board should be a square array"); 
+constraint assert(S * S == N, "The board size should be a square of a natural number");
+constraint assert(min(board) = 0, "The board should contain at least one empty space and no negative values");
+constraint assert(max(board) <= N, "The board shouldn't contain values bigger than the board size");
 
 %%%%%%%%%%% 
 % VARIABLES  
