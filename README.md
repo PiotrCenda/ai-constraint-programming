@@ -35,6 +35,6 @@ The rest will be taken care of automatically. You can check the `GRADE.md` file 
 
 ## Lab Instructions
 
-All instructions are available via [the project wiki](https://gitlab.com/agh-courses/2020-2021/artificial-intelligence/lab-02-basic-cp-problems/-/wikis/Constraint-Programming:-Basic-Problems). 
+All instructions are available via the project wiki. 
 All files required to solve the assignments are already included in the repository:
  
