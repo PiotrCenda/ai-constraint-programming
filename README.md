@@ -6,7 +6,7 @@ Laboratory created by Mateusz Ślażyński for Artificial Intelligence course at
 
 * [ ] Make sure, you have a **private** group (you don't have to create a new one, if you have a nice one already)
   * [how to create a group](https://docs.gitlab.com/ee/user/group/#create-a-group)
-* [ ] Add @mateusz.slazynski as thenew group member (role: **maintainer**)
+* [ ] Add @bobot-is-a-bot as thenew group member (role: **maintainer**)
   * [how to add an user](https://docs.gitlab.com/ee/user/group/#add-users-to-a-group)
 * [ ] Fork this project into your private group
   * [how to create a fork](https://docs.gitlab.com/ee/user/project/repository/forking_workflow.html#creating-a-fork)
