@@ -1,6 +1,6 @@
 # Constraint Programming: Basic Problems
 
-Laboratory created by Mateusz Ślażyński for Artificial Intelligence course at AGH University of Science and Technology in Kraków.
+Laboratory created by Mateusz Ślażyński for Constraint Programming course at AGH University of Science and Technology in Kraków.
 
 ## Setup 
 
