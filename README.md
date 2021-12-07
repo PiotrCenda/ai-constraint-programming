@@ -1,4 +1,4 @@
-# Realistic Use Case - Port Scheduling
+# Constraint Programming — Realistic Use Case
 
 1. Check the ``handout.pdf`` for the instructions. Ignore all sections about submitting to coursera.
 2. Solve the problem! Do not forget about commiting your changes.
@@ -29,7 +29,7 @@ If you want to visualize your solution, you have to:
 
 * [ ] Make sure, you have a **private** group (you don't have to create a new one, if you have a nice one already)
   * [how to create a group](https://docs.gitlab.com/ee/user/group/#create-a-group)
-* [ ] Add @mateusz.slazynski as thenew group member (role: **maintainer**)
+* [ ] Add @bobot-is-a-bot as the new group member (role: **maintainer**)
   * [how to add an user](https://docs.gitlab.com/ee/user/group/#add-users-to-a-group)
 * [ ] Fork this project into your private group
   * [how to create a fork](https://docs.gitlab.com/ee/user/project/repository/forking_workflow.html#creating-a-fork)
