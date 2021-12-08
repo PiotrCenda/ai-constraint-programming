@@ -1,4 +1,4 @@
-# Constraint Programming: Modeling Techniques
+# Constraint Programming: Search Modeling
 
 Laboratory created by Mateusz Ślażyński for Constraint Programming course at AGH University of Science and Technology in Kraków.
 
