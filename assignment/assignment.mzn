@@ -12,7 +12,8 @@ array[int] of 1..infinity: menu_prices;
 array[menu_items] of string: menu_names;
 array[menu_items] of int: yumyum_factors; 
 
-array[menu_items] of var 0..((money_limit div min(menu_prices)) + 1): order;
+% ((money_limit div min(menu_prices)) + 1)
+array[menu_items] of var 0..infinity: order;
 var int: total_yumyum = sum([order[i] * yumyum_factors[i] | i in menu_items]);
 var int: total_price = sum([order[i] * menu_prices[i] | i in menu_items]);
 
