@@ -8,7 +8,7 @@
 % Parameters
 0..infinity: money_limit;
 set of int: menu_items = index_set(menu_prices); 
-array[int] of 0..infinity: menu_prices;
+array[int] of 1..infinity: menu_prices;
 array[menu_items] of string: menu_names;
 array[menu_items] of int: yumyum_factors; 
 
