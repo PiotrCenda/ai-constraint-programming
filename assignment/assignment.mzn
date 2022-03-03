@@ -7,13 +7,13 @@
 
 % Parameters
 int: money_limit;
-int: menu_length = length(menu_prices);
+int: menu_length;
 set of int: menu_items = index_set(menu_prices); 
 array[int] of int: menu_prices;
 array[menu_items] of string: menu_names;
 array[menu_items] of int: yumyum_factors; 
 
-array[menu_items] of var 0..infinity: order;
+array[menu_items] of var int: order;
 
 constraint sum([order[i] * menu_prices[i] | i in 1..menu_length]) <= money_limit;
 
