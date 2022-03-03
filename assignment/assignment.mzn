@@ -4,7 +4,6 @@ set of int: menu_items = index_set(menu_prices);
 array[int] of int: menu_prices;
 array[menu_items] of string: menu_names;
 array[menu_items] of int: yumyum_factors; 
-array[menu_items] of int: available;
 
 % TODO:
 % - add assertions/specify domains excluding useless parameters' values
