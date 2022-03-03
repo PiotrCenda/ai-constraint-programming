@@ -6,11 +6,11 @@
 % TIP. for the variables, use names that are already in the output definition. 
 
 % Parameters
-0..infinity: money_limit;
+1..infinity: money_limit;
 set of int: menu_items = index_set(menu_prices); 
 array[int] of 1..infinity: menu_prices;
 array[menu_items] of string: menu_names;
-array[menu_items] of 0..infinity: yumyum_factors; 
+array[menu_items] of 1..infinity: yumyum_factors; 
 
 % ((money_limit div min(menu_prices)) + 1)
 array[menu_items] of var 0..infinity: order;
