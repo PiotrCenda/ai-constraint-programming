@@ -35,6 +35,6 @@ The rest will be taken care of automatically. You can check the `GRADE.md` file 
 
 ## Lab Instructions
 
-All instructions are available via the project wiki (check the left sidebar). 
-All files required to solve the assignments are already included in the repository:
+All instructions are available via the [project wiki](https://gitlab.com/agh-courses/2021-2022/constraint-programming/lab-01-the-xkcd-waiter-problem/-/wikis/home). 
+All files required to solve the assignments are already included in the repository.
  
