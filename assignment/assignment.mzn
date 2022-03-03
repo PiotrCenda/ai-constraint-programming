@@ -8,7 +8,7 @@
 % Parameters
 int: money_limit;
 set of int: menu_items = index_set(menu_prices); 
-array[int] of int: menu_prices;
+array[int] of 0..infinity: menu_prices;
 array[menu_items] of string: menu_names;
 array[menu_items] of int: yumyum_factors; 
 array[menu_items] of var 0..(money_limit div min(menu_prices)): order;
