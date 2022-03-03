@@ -10,7 +10,7 @@
 set of int: menu_items = index_set(menu_prices); 
 array[int] of 1..infinity: menu_prices;
 array[menu_items] of string: menu_names;
-array[menu_items] of int: yumyum_factors; 
+array[menu_items] of 0..infinity: yumyum_factors; 
 
 % ((money_limit div min(menu_prices)) + 1)
 array[menu_items] of var 0..infinity: order;
