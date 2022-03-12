@@ -32,6 +32,11 @@ Laboratory created by Mateusz Ślażyński @ AGH University of Science and Techn
 
 The rest will be taken care of automatically. You can check the `GRADE.md` file for your grade / test results. Be aware that it may take some time (up to one hour) till this file appears / gets updated.  
 
+## Off-line Tests
+
+Assignments contain (experimental) offline checkers. If you open project `lab-02.mzp`, you will see that every model has option to `run+check` instead of just `run`. The checker will give you feedback if the solution found according to your model is correct.
+
+Off-line tests are there only to assist you, they don't impact the grade which is set by Bobot.
 
 ## Lab Instructions
 
