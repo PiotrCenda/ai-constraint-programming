@@ -21,7 +21,8 @@ array[1..N] of var 1..N: rows;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 constraint alldifferent(rows);
-constraint alldifferent([abs(rows[i] - i) | i in 1..N]);
+% constraint alldifferent([abs(rows[i] - i) | i in 1..N]);
+constraint forall (i,j in 1..N where i != j) (abs(rows[i] - i) != abs(rows[j] - j));
 
 solve satisfy; 
 %%%%%%%%%%%%%%%%%%%
