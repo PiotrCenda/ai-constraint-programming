@@ -23,9 +23,9 @@ array[1..nodesNumber] of var 1..infinity: nodes;
 % tip:
 % - number of used colors = the highest used color number                     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-constraint forall(i in 1..nodesNumber)(alldifferent([nodes[j] | j in 1..nodesNumber where edges[i, j] == true /\ i != j]));
-% constraint forall(i in 1..nodesNumber where edges[i,])(alldifferent(nodes));
+constraint forall (i in 1..nodesNumber) (alldifferent([nodes[j] | j in 1..nodesNumber where edges[i,j] == true /\ i != j]));
 constraint colorsNumber = max(nodes);
+
 %%%%%%%%
 % GOAL  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
