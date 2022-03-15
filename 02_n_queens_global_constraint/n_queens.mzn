@@ -1,3 +1,5 @@
+include "alldifferent.mzn";
+
 % number of queens
 int: N;
 
@@ -10,12 +12,16 @@ int: N;
 % use names from the oput
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+array[1..N] of var 1..N: rows;
 %%%%%%%%%%%%%
 % TODO: CONSTRAINTS 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 % add global constraints
 % tip: do not use the != constraint, just alldifferent
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+constraint alldifferent(rows);
+constraint alldifferent([abs(rows[i] - i) | i in 1..N]);
 
 solve satisfy; 
 %%%%%%%%%%%%%%%%%%%
