@@ -1,3 +1,5 @@
+include "alldifferent.mzn";
+
 %%%%%%%%%%%
 % REMINDER 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -12,7 +14,7 @@
 array[int,int] of int: board;
 set of int: PuzzleRange = index_set_1of2(board);
 int: N = max(PuzzleRange);
-int: S = floor(sqrt(N));
+int: S = floor(sqrt(N)); 
 
 constraint assert(index_set_2of2(board) = PuzzleRange, "The board should be a square array"); 
 constraint assert(S * S == N, "The board size should be a square of a natural number");
@@ -24,6 +26,7 @@ constraint assert(max(board) <= N, "The board shouldn't contain values bigger th
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % You know... Use the 'puzzle' name from the output
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+array[PuzzleRange, PuzzleRange] of var PuzzleRange: puzzle;
 
 %%%%%%%%%%%%%%%%
 % Constraints 
@@ -35,6 +38,10 @@ constraint assert(max(board) <= N, "The board shouldn't contain values bigger th
 %   is the first three elements of the first row of the board array
 % - there are
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+constraint forall(i, j in PuzzleRange where board[i, j] != 0) (puzzle[i, j] = board[i, j]);
+constraint forall (i in PuzzleRange) (alldifferent(puzzle[i, ..]));
+constraint forall (i in PuzzleRange) (alldifferent(puzzle[.., i]));
+constraint forall (i, j in 1..S) (alldifferent(puzzle[(1+(i-1)*3)..(3+(i-1)*3), (1+(j-1)*3)..(3+(j-1)*3)]));
 
 solve satisfy;
 
