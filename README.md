@@ -1,12 +1,12 @@
 # Constraint Programming: Modeling Techniques
 
-Laboratory created by Mateusz Ślażyński for Constraint Programming course at AGH University of Science and Technology in Kraków.
+Laboratory created by Mateusz Ślażyński @ AGH University of Science and Technology in Kraków.
 
 ## Lab Instructions
 
-All instructions are available via the project wiki.
-All files required to solve the assignments are already included in the repository.
-
+All instructions are available via [the project wiki](https://gitlab.com/agh-courses/2021-2022/artificial-intelligence/lab-03-cp-modeling-techniques/-/wikis/home). 
+All files required to solve the assignments are already included in the repository:
+ 
 ## Setup 
 
 * [ ] Make sure, you have a **private** group (you don't have to create a new one, if you have a nice one already)
@@ -15,7 +15,6 @@ All files required to solve the assignments are already included in the reposito
   * [how to add an user](https://docs.gitlab.com/ee/user/group/#add-users-to-a-group)
 * [ ] Fork this project into your private group
   * [how to create a fork](https://docs.gitlab.com/ee/user/project/repository/forking_workflow.html#creating-a-fork)
-
 
 ## How To Submit Solutions
 
