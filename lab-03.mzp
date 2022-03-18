@@ -1,0 +1,24 @@
+{
+    "openFiles": [
+    ],
+    "openTab": -1,
+    "projectFiles": [
+        "01_graph_coloring_symmetry/basic_data.dzn",
+        "01_graph_coloring_symmetry/data_with_clique.dzn",
+        "01_graph_coloring_symmetry/graph_coloring.mzc",
+        "01_graph_coloring_symmetry/graph_coloring.mzn",
+        "02_multi_knapsack_symmetry/multi_knapsack.mzc",
+        "02_multi_knapsack_symmetry/multi_knapsack.mzn",
+        "02_multi_knapsack_symmetry/multi_knapsack_data.dzn",
+        "03_redundant/magic_series.mzc",
+        "03_redundant/magic_series.mzn",
+        "04_channeling/n_queens.mzc",
+        "04_channeling/n_queens.mzn",
+        "05_reification/stable_marriage.dzn",
+        "05_reification/stable_marriage.mzc",
+        "05_reification/stable_marriage.mzn"
+    ],
+    "selectedBuiltinConfigId": "org.gecode.gecode",
+    "selectedBuiltinConfigVersion": "6.3.0",
+    "version": 106
+}
