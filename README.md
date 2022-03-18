@@ -5,7 +5,13 @@ Laboratory created by Mateusz Ślażyński @ AGH University of Science and Techn
 ## Lab Instructions
 
 All instructions are available via [the project wiki](https://gitlab.com/agh-courses/2021-2022/artificial-intelligence/lab-03-cp-modeling-techniques/-/wikis/home). 
-All files required to solve the assignments are already included in the repository:
+All files required to solve the assignments are already included in the repository.
+
+## Off-line Tests
+
+Assignments contain (experimental) offline checkers. If you open project `lab-03.mzp`, you will see that every model has option to `run+check` instead of just `run`. The checker will give you feedback if the solution found according to your model is correct.
+
+Off-line tests are there only to assist you, they don't impact the grade which is set by Bobot.
  
 ## Setup 
 
