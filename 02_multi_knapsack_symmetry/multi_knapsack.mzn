@@ -1,5 +1,5 @@
 include "at_most.mzn";
-include "lex_less.mzn";
+include "lex_lesseq.mzn";
 
 predicate knapsack(array[int] of var int: Weights, array[int] of var 0..1: Taken, int: Capacity) =
            sum(i in index_set(Weights))( Weights[i] * Taken[i]) <= Capacity
@@ -20,6 +20,8 @@ constraint forall(i in 1..items_n)(
 constraint forall(i in 1..knapsacks_n)(
  knapsack(weights, [taken[i,j] | j in 1..items_n], capacity)
 );
+
+constraint forall(i in 2..knapsacks_n)(lex_lesseq(taken[i-1, ..], taken[i, ..]));
 
 solve maximize sum(i in 1..knapsacks_n, j in 1..items_n) (taken[i,j] * values[j]);
 
