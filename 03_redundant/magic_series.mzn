@@ -12,6 +12,7 @@ constraint distribute(magic, array1d(Indexes, Indexes), magic);
 % or even
 %   magic[i] = count(magic, i)
 % );
+constraint sum(magic) = length(magic);
   
 solve satisfy;
   
