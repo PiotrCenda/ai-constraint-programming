@@ -1,6 +1,6 @@
 include "distribute.mzn";
 
-int: N 
+int: N; 
 set of int: Indexes = 0..N-1;
 
 array[Indexes] of var Indexes: magic;
