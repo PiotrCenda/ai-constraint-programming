@@ -32,6 +32,3 @@ solve satisfy;
   
 output [ if fix(rows[j]) == i then "|Q" else "|_" endif ++
   if j == n then "\n" else "" endif | i,j in 1..n];
-output ["\(rows) \n"];
-output [ if fix(qb[i,j]) == true then "|Q" else "|_" endif ++
-  if j == n then "\n" else "" endif | i,j in 1..n];
