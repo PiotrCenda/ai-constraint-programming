@@ -1,0 +1,14 @@
+{
+    "openFiles": [
+    ],
+    "openTab": -1,
+    "projectFiles": [
+        "01_search/n_queens.mzc",
+        "01_search/n_queens.mzn",
+        "02_packing/packing.mzc",
+        "02_packing/packing.mzn"
+    ],
+    "selectedBuiltinConfigId": "org.gecode.gecode",
+    "selectedBuiltinConfigVersion": "6.3.0",
+    "version": 106
+}
