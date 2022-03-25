@@ -1,10 +1,10 @@
 # Constraint Programming: Search Modeling
 
-Laboratory created by Mateusz Ślażyński for Constraint Programming course at AGH University of Science and Technology in Kraków.
+Laboratory created by Mateusz Ślażyński at AGH University of Science and Technology in Kraków.
 
 ## Lab Instructions
 
-All instructions are available via the project wiki. 
+All instructions are available via the project [wiki](https://gitlab.com/agh-courses/2021-2022/artificial-intelligence/lab-04-search-modelling/-/wikis/home). 
 All files required to solve the assignments are already included in the repository.
 
 ## Setup 
