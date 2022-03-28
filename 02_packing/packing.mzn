@@ -19,10 +19,10 @@ constraint width = max([x[i] + i | i in SQUARES]);
 constraint height = max([y[i] + i | i in SQUARES]);
 
 % Constraint 2: Squares should not overlap
-constraint forall(i, j in SQUARES where i != j)(x[i] + i <= x[j]);
-constraint forall(i, j in SQUARES where i != j)(y[i] + i <= y[j]);
-constraint forall(i, j in SQUARES where i != j)(x[i] >= x[j] + j);
-constraint forall(i, j in SQUARES where i != j)(y[i] >= y[j] + j);
+constraint forall(i, j in SQUARES where i != j)(x[i] + i <= x[j] \/ y[i] + i <= y[j] \/ x[i] >= x[j] + j \/ y[i] >= y[j] + j);
+
+% symmetry breaking
+constraint height >= width;
 
 % Goal
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
