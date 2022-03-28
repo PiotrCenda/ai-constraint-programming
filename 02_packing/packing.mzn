@@ -1,3 +1,6 @@
+include "diffn.mzn";
+include "cumulative.mzn";
+
 % Parameters
 %%%%%%%%%%%
 int: n;                      % How many squares do we have?
@@ -5,12 +8,13 @@ set of int: SQUARES = 1..n;  % Set of the available squares
 
 % Variables
 %%%%%%%%%%%
-var n..sum([i | i in SQUARES]): height;    % height of the container
-var n..sum([i | i in SQUARES]): width;     % width of the conainer
-var sum([pow(i, 2) | i in SQUARES])..n*sum([i | i in SQUARES]): area = height * width; % container's area
-array[SQUARES] of var 0..(sum([i | i in SQUARES]) - 1): x; % squares' coordinates in the container
-array[SQUARES] of var 0..(sum([i | i in SQUARES]) - 1): y; % squares' coordinated in the container
-  
+var n..sum(SQUARES): height;    % height of the container
+var n..sum(SQUARES): width;     % width of the conainer
+var sum([pow(i, 2) | i in SQUARES])..n*sum(SQUARES): area = height * width; % container's area
+array[SQUARES] of var 0..(sum(SQUARES) - 1): x; % squares' coordinates in the container
+array[SQUARES] of var 0..(sum(SQUARES) - 1): y; % squares' coordinated in the container
+array[SQUARES] of int: t = [i | i in 1..n];
+
 % Constraints 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
@@ -20,13 +24,21 @@ constraint height = max([y[i] + i | i in SQUARES]);
 
 % Constraint 2: Squares should not overlap
 constraint forall(i, j in SQUARES where i != j)(x[i] + i <= x[j] \/ y[i] + i <= y[j] \/ x[i] >= x[j] + j \/ y[i] >= y[j] + j);
+constraint diffn(x, y, SQUARES, SQUARES);
 
 % symmetry breaking
 constraint height >= width;
 
+% redundant constraints
+constraint cumulative(y, SQUARES, SQUARES, width);
+constraint cumulative(x, SQUARES, SQUARES, height);
+
 % Goal
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-solve minimize area; 
+solve :: seq_search([
+             int_search(reverse(sort_by(x, t)), input_order, indomain_median),
+             int_search(reverse(sort_by(y, t)), input_order, indomain_median)])
+      minimize area;
   
 
 % Boring output  %
