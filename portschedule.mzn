@@ -81,13 +81,20 @@ array[STOCKPILE] of var RECLAIMER: which;
 % TIP: definetely change the line below
 var int: obj = 0;
 
-
+% TIP: you may add some search annotations
+solve minimize obj;
 
 % Stage F
-% Add constraints in your model so that the two reclaimers on rail i numbered 2i − 1 and 2i for i ∈ 1..nr div 2 remain so the western one 2i − 1 is never east of the eastern one 2i. Note they can legitimately be in the same position (this is for simplicity, its not very real). Note that if there are
-% an odd number of reclaimers the last reclaimer is on its own rail and has no further constraints.
-% TIP: do some "channeling" and model reclaimers' positions explicitely with a new array of variables.
+% Add constraints in your model so that the two reclaimers on rail i numbered 2i − 1 and 2i for i ∈ 1..nr div 2 remain so the western one 2i − 1 is never east of the eastern one 2i. Note they can legitimately be in the same position (this is for simplicity, its not very real). 
+% TIP: do some "channeling" and model reclaimers' positions explicitely with a new array of variables as below
+% 1) when reclaiming, reclaimers position should equal to the westend of the stockpile being reclaimed
+% 2) otherwise they should not move faster than the `reclaim_speed` allows
+array[RECLAIMER, TIME] of var POSITION: reclaimers_positions;
 
+% When stage F is not active, just make it full of 0 as it doesn't matter
+constraint not stageF -> forall(r in RECLAIMER, t in TIME)(
+  reclaimers_positions[r,t] == 0
+);
 
 
 
