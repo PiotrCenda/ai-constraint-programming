@@ -10,5 +10,3 @@ reclaim_speed = 1;
 maxtime = 60;
 arrival = [ 20, 0, 10, 0 ];
 len = 14;
-westend  = [10, 0, 8, 8, 6, 3, 0];
-which = [1, 2, 1, 1, 2, 2, 1];
