@@ -2,7 +2,7 @@
 
 1. Check the ``handout.pdf`` for the instructions. Ignore all sections about submitting to coursera.
 2. Solve the problem! Do not forget about commiting your changes.
-3. You can test your model by runing ``test.sh`` and ``profile.sh`` scripts. They both require decent versions of ``bash`` and ``MiniZinc`` binaries in ``$PATH``). 
+3. You profile your model with the ``profile.sh`` script. It requires decent versions of ``bash`` and ``MiniZinc`` binaries in ``$PATH``). 
 
 ## Visualization
 
