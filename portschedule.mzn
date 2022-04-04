@@ -30,23 +30,36 @@ array[STOCKPILE] of var TIME: endstack;
 array[STOCKPILE] of var TIME: reclaim;
 array[STOCKPILE] of var TIME: finished;
 array[STOCKPILE] of var RECLAIMER: which;
-
+%array of time spend on pad (stage A.4)
+array[STOCKPILE] of var TIME: time_spend_on_pad;
 % Go crazy here
 
 % Stage A - Packing Problem
 % Two stockpiles can't overlap in "spacetime"
 
+%dodaç cumulative constaint dla szybkosci
+
 % 1) what's the relation between endstack and stack times
-% 2) what's the relation between reclaim and endstack times
+constraint forall (i in STOCKPILE) (endstack[i] = stack[i] + stack_time * size[i]);
+% 2) what's the relation between reclaim and endstack times\
+% nie jestem pewien czy tutaj ok 
+constraint forall (i in STOCKPILE) (reclaim[i] >= endstack[i]);
 % 3) what's the relation between finished and reclaim times
+constraint forall (i in STOCKPILE) (finished[i] = reclaim[i] + reclaim_time * size[i]);
 % 4) how much time the stockpiles spend on the pad?
 %    - create a new array and store this info - it will be useful :)
+constraint forall (i in STOCKPILE) (time_spend_on_pad[i] = finished[i] - stack[i]);
 % 5) what's the relation between eastend and westend offsets
+constraint forall (i in STOCKPILE) (eastend[i] = westend[i] + size[i]);
 % 6) packing problem
 %    a) stockpiles should not overlap in "spacetime", treat them as rectangles
 %    b) stockpiles can't use more space than there is available
 %    c) we can't go beyond the time limit
-  
+constraint forall (i, j in STOCKPILE where i != j) (
+  westend[j] - westend[i] >= size[i] 
+  \/ westend[i] - westend[j] >= size[j]
+  \/ finished[i] <= stack[j]
+  \/ finished[j] <= stack[i] );
   
   
 % Stage B 
