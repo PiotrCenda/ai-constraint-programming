@@ -102,10 +102,12 @@ constraint forall(i, j in STOCKPILE where i != j)(time_for_movement(i, j));
 % You may well need to significantly change your search strategy to get good solutions for the objective.
 
 % TIP: definetely change the line below
-var int: obj = max(finished);
+var int: obj = sum([finished[i] - arrival[ship[i]] | i in STOCKPILE]);
 
 % TIP: you may add some search annotations
-solve minimize obj;
+solve
+  :: restart_linear(1000)
+  minimize obj;
 
 % Stage F
 % Add constraints in your model so that the two reclaimers on rail i numbered 2i − 1 and 2i for i ∈ 1..nr div 2 remain so the western one 2i − 1 is never east of the eastern one 2i. Note they can legitimately be in the same position (this is for simplicity, its not very real). 
