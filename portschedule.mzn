@@ -90,14 +90,19 @@ constraint forall(i, j in STOCKPILE where i != j)(not_overlap_ship(i, j));
 %  <local variables>
 % } in <then something>
 
+predicate time_for_movement(var STOCKPILE: s1, var STOCKPILE: s2) = 
+let {
+  var int: dist = abs(westend[s1] - westend[s2])*reclaim_speed
+  } in ((which[s1] == which[s2]) -> (reclaim[s1]>=finished[s2]+dist \/ reclaim[s2]>=finished[s1]+dist));
 
+constraint forall(i, j in STOCKPILE where i != j)(time_for_movement(i, j));
 
 % Stage E
 % Add a definition of the objective to your model and change the model to minimize this value.
 % You may well need to significantly change your search strategy to get good solutions for the objective.
 
 % TIP: definetely change the line below
-var int: obj = 0;
+var int: obj = max(finished);
 
 % TIP: you may add some search annotations
 solve minimize obj;
