@@ -1,3 +1,6 @@
+include "diffn.mzn";
+include "cumulative.mzn";
+
 int: nr; % number of reclaimers
            % number of rails = nr for stages A,B,C,D,E
            % number of rails = (nr + 1) div 2 for stage F
@@ -32,17 +35,15 @@ array[STOCKPILE] of var TIME: finished;
 array[STOCKPILE] of var RECLAIMER: which;
 %array of time spend on pad (stage A.4)
 array[STOCKPILE] of var TIME: time_spend_on_pad;
+
 % Go crazy here
 
 % Stage A - Packing Problem
 % Two stockpiles can't overlap in "spacetime"
 
-%dodaç cumulative constaint dla szybkosci
-
 % 1) what's the relation between endstack and stack times
 constraint forall (i in STOCKPILE) (endstack[i] = stack[i] + stack_time * size[i]);
 % 2) what's the relation between reclaim and endstack times\
-% nie jestem pewien czy tutaj ok 
 constraint forall (i in STOCKPILE) (reclaim[i] >= endstack[i]);
 % 3) what's the relation between finished and reclaim times
 constraint forall (i in STOCKPILE) (finished[i] = reclaim[i] + reclaim_time * size[i]);
@@ -55,20 +56,18 @@ constraint forall (i in STOCKPILE) (eastend[i] = westend[i] + size[i]);
 %    a) stockpiles should not overlap in "spacetime", treat them as rectangles
 %    b) stockpiles can't use more space than there is available
 %    c) we can't go beyond the time limit
-constraint forall (i, j in STOCKPILE where i != j) (
-  westend[j] - westend[i] >= size[i] 
-  \/ westend[i] - westend[j] >= size[j]
-  \/ finished[i] <= stack[j]
-  \/ finished[j] <= stack[i] );
-  
+constraint diffn(stack, westend, time_spend_on_pad, size);
+constraint cumulative(stack, time_spend_on_pad, size, len);
+constraint forall(i in STOCKPILE)(finished[i] <= maxtime);
+
   
 % Stage B 
 % Two stockpiles reclaimed by the same reclaimer do not overlap in time
 %
 % Tip: write your first custom predicate, i.e.
-% predicate not_overlap(var STOCKPILE: s1, var STOCKPILE: s2) =
-% <something something> ;
+predicate not_overlap(var STOCKPILE: s1, var STOCKPILE: s2) = ((reclaim[s1]<finished[s2] /\ finished[s1]>reclaim[s2]) -> (which[s1] != which[s2]));
 
+constraint forall(i, j in STOCKPILE where i != j)(not_overlap(i, j));
 
 
 % Stage C
@@ -76,6 +75,11 @@ constraint forall (i, j in STOCKPILE where i != j) (
 % 2) also no two stockpiles can be reclaimed onto the same ship at the same time. Make sure these reclaims do not overlap in time.
 % TIP: reuse your "not_overlap" predicate
 
+constraint forall(i in STOCKPILE)(arrival[ship[i]] <= reclaim[i]);
+
+predicate not_overlap_ship(var STOCKPILE: s1, var STOCKPILE: s2) = ((ship[s1] == ship[s2]) -> (reclaim[s1]>=finished[s2] \/ finished[s1]<=reclaim[s2]));
+
+constraint forall(i, j in STOCKPILE where i != j)(not_overlap_ship(i, j));
 
 
 % Stage D
