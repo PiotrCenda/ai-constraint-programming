@@ -92,7 +92,7 @@ constraint forall(i, j in STOCKPILE where i != j)(not_overlap_ship(i, j));
 
 predicate time_for_movement(var STOCKPILE: s1, var STOCKPILE: s2) = 
 let {
-  var int: dist = abs(westend[s1] - westend[s2])*reclaim_speed
+  var 0..len: dist = abs(westend[s1] - westend[s2])*reclaim_speed
   } in ((which[s1] == which[s2]) -> (reclaim[s1]>=finished[s2]+dist \/ reclaim[s2]>=finished[s1]+dist));
 
 constraint forall(i, j in STOCKPILE where i != j)(time_for_movement(i, j));
@@ -102,11 +102,14 @@ constraint forall(i, j in STOCKPILE where i != j)(time_for_movement(i, j));
 % You may well need to significantly change your search strategy to get good solutions for the objective.
 
 % TIP: definetely change the line below
-var int: obj = sum([finished[i] - arrival[ship[i]] | i in STOCKPILE]);
+% var 0..nsh*maxtime: obj = sum([finished[i] - arrival[ship[i]] | i in STOCKPILE]);
+
+var 0..nsh*maxtime: obj = sum([max([finished[j] | j in STOCKPILE where ship[j] == i]) - arrival[i] | i in SHIP]);
 
 % TIP: you may add some search annotations
-solve
-  :: restart_linear(1000)
+solve 
+  :: seq_search([int_search(time_spend_on_pad, input_order, indomain_min),
+                int_search(finished, input_order, indomain_min)])
   minimize obj;
 
 % Stage F
@@ -120,7 +123,6 @@ array[RECLAIMER, TIME] of var POSITION: reclaimers_positions;
 constraint not stageF -> forall(r in RECLAIMER, t in TIME)(
   reclaimers_positions[r,t] == 0
 );
-
 
 
 % don't change the output
