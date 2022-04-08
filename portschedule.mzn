@@ -126,7 +126,7 @@ constraint stageF -> forall(r in RECLAIMER, t in 1..maxtime, i in STOCKPILE wher
   abs(reclaimers_positions[r,t] - reclaimers_positions[r,t-1]) <= reclaim_speed  % maybe 1 div reclaim speed, because it's time/placement
 );
 
-constraint forall(r in 1..((nr+1) div 2), t in TIME)(
+constraint stageF -> forall(r in 1..((nr+1) div 2), t in TIME)(
   reclaimers_positions[2*r-1, t] <= reclaimers_positions[2*r, t]
 );
 
