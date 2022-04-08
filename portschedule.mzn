@@ -65,7 +65,7 @@ constraint forall(i in STOCKPILE)(finished[i] <= maxtime);
 % Two stockpiles reclaimed by the same reclaimer do not overlap in time
 %
 % Tip: write your first custom predicate, i.e.
-predicate not_overlap(var STOCKPILE: s1, var STOCKPILE: s2) = ((reclaim[s1]<finished[s2] /\ finished[s1]>reclaim[s2]) -> (which[s1] != which[s2]));
+predicate not_overlap(var STOCKPILE: s1, var STOCKPILE: s2) = ((reclaim[s1] < finished[s2] /\ finished[s1] > reclaim[s2]) -> (which[s1] != which[s2]));
 
 constraint forall(i, j in STOCKPILE where i != j)(not_overlap(i, j));
 
@@ -77,7 +77,7 @@ constraint forall(i, j in STOCKPILE where i != j)(not_overlap(i, j));
 
 constraint forall(i in STOCKPILE)(arrival[ship[i]] <= reclaim[i]);
 
-predicate not_overlap_ship(var STOCKPILE: s1, var STOCKPILE: s2) = ((ship[s1] == ship[s2]) -> (reclaim[s1]>=finished[s2] \/ finished[s1]<=reclaim[s2]));
+predicate not_overlap_ship(var STOCKPILE: s1, var STOCKPILE: s2) = ((ship[s1] == ship[s2]) -> (reclaim[s1] >= finished[s2] \/ finished[s1] <= reclaim[s2]));
 
 constraint forall(i, j in STOCKPILE where i != j)(not_overlap_ship(i, j));
 
@@ -93,7 +93,7 @@ constraint forall(i, j in STOCKPILE where i != j)(not_overlap_ship(i, j));
 predicate time_for_movement(var STOCKPILE: s1, var STOCKPILE: s2) = 
 let {
   var 0..len: dist = abs(westend[s1] - westend[s2])*reclaim_speed
-  } in ((which[s1] == which[s2]) -> (reclaim[s1]>=finished[s2]+dist \/ reclaim[s2]>=finished[s1]+dist));
+  } in ((which[s1] == which[s2]) -> (reclaim[s1] >= finished[s2] + dist \/ reclaim[s2] >= finished[s1] + dist));
 
 constraint forall(i, j in STOCKPILE where i != j)(time_for_movement(i, j));
 
@@ -107,9 +107,8 @@ constraint forall(i, j in STOCKPILE where i != j)(time_for_movement(i, j));
 var 0..nsh*maxtime: obj = sum([max([finished[j] | j in STOCKPILE where ship[j] == i]) - arrival[i] | i in SHIP]);
 
 % TIP: you may add some search annotations
-solve 
-  :: seq_search([int_search(time_spend_on_pad, input_order, indomain_min),
-                int_search(finished, input_order, indomain_min)])
+solve :: seq_search([int_search(time_spend_on_pad, input_order, indomain_min),
+                     int_search(finished, input_order, indomain_min)])
   minimize obj;
 
 % Stage F
@@ -118,6 +117,18 @@ solve
 % 1) when reclaiming, reclaimers position should equal to the westend of the stockpile being reclaimed
 % 2) otherwise they should not move faster than the `reclaim_speed` allows
 array[RECLAIMER, TIME] of var POSITION: reclaimers_positions;
+
+constraint stageF -> forall(r in RECLAIMER, t in TIME, i in STOCKPILE where (r == which[i] /\ t >= reclaim[i] /\ t <= finished[i]))(
+  reclaimers_positions[r,t] == westend[i]
+);
+
+constraint stageF -> forall(r in RECLAIMER, t in 1..maxtime, i in STOCKPILE where (r == which[i] /\ (t <= reclaim[i] \/ t >= finished[i])))(
+  abs(reclaimers_positions[r,t] - reclaimers_positions[r,t-1]) <= reclaim_speed  % maybe 1 div reclaim speed, because it's time/placement
+);
+
+constraint forall(r in 1..((nr+1) div 2), t in TIME)(
+  reclaimers_positions[2*r-1, t] <= reclaimers_positions[2*r, t]
+);
 
 % When stage F is not active, just make it full of 0 as it doesn't matter
 constraint not stageF -> forall(r in RECLAIMER, t in TIME)(
