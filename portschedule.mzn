@@ -37,9 +37,10 @@ array[STOCKPILE] of var RECLAIMER: which;
 % Two stockpiles can't overlap in "spacetime"
 
 % 1) what's the relation between endstack and stack times
-% 2) what's the relation between finished and stack times
-% 3) what's the relation between reclaim and endstack times
-% 4) what's the relation between finished and reclam times
+% 2) what's the relation between reclaim and endstack times
+% 3) what's the relation between finished and reclaim times
+% 4) how much time the stockpiles spend on the pad?
+%    - create a new array and store this info - it will be useful :)
 % 5) what's the relation between eastend and westend offsets
 % 6) packing problem
 %    a) stockpiles should not overlap in "spacetime", treat them as rectangles
